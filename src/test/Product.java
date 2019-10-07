@@ -1,6 +1,4 @@
 package test;
-import VendingMachine.Products;
-import org.junit.jupiter.api.Test;
 
 public class Product {
 //    @Test

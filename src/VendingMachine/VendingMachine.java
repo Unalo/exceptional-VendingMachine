@@ -1,9 +1,8 @@
 package VendingMachine;
 
-import Exceptions.ChocolateException;
-import Exceptions.ProductNotFoundException;
-import Exceptions.SaltySnacksException;
-import Exceptions.SoftDrinkException;
+import Exceptions.*;
+import Products.*;
+
 
 public class VendingMachine {
 
@@ -11,31 +10,30 @@ public class VendingMachine {
      int stockSoftDrink = 5;
      int stockSaltySnacks = 5;
 
-    public  void addStock(Products products, int stock){
-        if(products instanceof SoftSDrinks){
+    public  void addStock(Product product, int stock){
+        if(product instanceof SoftSDrink){
             stockSoftDrink = stock;
-        } else  if (products instanceof SaltySnacks) {
+        } else  if (product instanceof SaltySnack) {
             stockSaltySnacks = stock;
-        } else if (products instanceof Chocolates) {
+        } else if (product instanceof Chocolate) {
             stockChocolate = stock;
         }
     }
 
-    public  void buy(Products products) throws ProductNotFoundException {
-        if(products instanceof  SoftSDrinks){
+    public  void buy(Product product) throws ProductNotFoundException {
+        if (product instanceof SoftSDrink) {
             if (stockSoftDrink == 0) {
                 throw new SoftDrinkException();
             } else {
                 stockSoftDrink+=-1;
-                System.out.println(stockSoftDrink);
             }
-        } else if (products instanceof SaltySnacks) {
+        } else if (product instanceof SaltySnack) {
             if (stockSaltySnacks == 0 ) {
                 throw new SaltySnacksException();
             } else {
                 stockSaltySnacks +=-1;
             }
-        } else if (products instanceof Chocolates) {
+        } else if (product instanceof Chocolate) {
             if (stockChocolate == 0 ) {
                 throw new ChocolateException();
             } else {
@@ -45,33 +43,33 @@ public class VendingMachine {
     }
 
     public static void main(String[] args) throws ProductNotFoundException {
+
+        VendingMachine vendingMachine = new VendingMachine();
+
         try {
-            Chocolates chocolates = new Chocolates();
-            SaltySnacks saltySnacks = new SaltySnacks();
-            SoftSDrinks softSDrinks = new SoftSDrinks();
-            VendingMachine vendingMachine = new VendingMachine();
 
-            vendingMachine.addStock(softSDrinks,2);
-            vendingMachine.addStock(chocolates, 1);
-            vendingMachine.addStock(saltySnacks, 2);
+            Chocolate Cadbury = new Chocolate("Cadbury");
+            SaltySnack popcorn = new SaltySnack("popcorn");
+            SoftSDrink coke = new SoftSDrink("coke");
 
-//            vendingMachine.buy(softSDrinks);
-//            vendingMachine.buy(softSDrinks);
-//            vendingMachine.buy(softSDrinks);
+            vendingMachine.addStock(Cadbury,2);
+            vendingMachine.addStock(popcorn, 1);
+            vendingMachine.addStock(coke, 2);
 
-//            vendingMachine.buy(chocolates);
-//            vendingMachine.buy(chocolates);
+            vendingMachine.buy(coke);
+            vendingMachine.buy(coke);
+            vendingMachine.buy(coke);
 
-            vendingMachine.buy(saltySnacks);
-            vendingMachine.buy(saltySnacks);
-            vendingMachine.buy(saltySnacks);
+            vendingMachine.buy(Cadbury);
+            vendingMachine.buy(Cadbury);
+           // vendingMachine.buy();
+            ;
+            vendingMachine.buy(popcorn);
+            vendingMachine.buy(popcorn);
+            vendingMachine.buy(popcorn);
 
-        } catch (SoftDrinkException ex) {
+        } catch (ProductNotFoundException ex) {
           ex.printStackTrace();
-        } catch (SaltySnacksException ex) {
-            ex.printStackTrace();
-        } catch (ChocolateException ex) {
-            ex.printStackTrace();
         }
     }
 }
