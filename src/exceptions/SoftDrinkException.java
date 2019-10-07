@@ -1,4 +1,4 @@
-package Exceptions;
+package exceptions;
 
 public class SoftDrinkException extends ProductNotFoundException {
    public SoftDrinkException() {

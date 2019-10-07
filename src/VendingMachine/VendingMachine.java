@@ -1,14 +1,13 @@
 package VendingMachine;
 
-import Exceptions.*;
-import Products.*;
-
+import exceptions.*;
+import products.*;
 
 public class VendingMachine {
 
-     int stockChocolate = 5;
-     int stockSoftDrink = 5;
-     int stockSaltySnacks = 5;
+     int stockChocolate = 0;
+     int stockSoftDrink = 0;
+     int stockSaltySnacks = 0;
 
     public  void addStock(Product product, int stock){
         if(product instanceof SoftSDrink){
@@ -17,6 +16,16 @@ public class VendingMachine {
             stockSaltySnacks = stock;
         } else if (product instanceof Chocolate) {
             stockChocolate = stock;
+        }
+    }
+    
+    public void getStock(Product product) {
+        if (product instanceof SoftSDrink) {
+            System.out.println("we have " + stockSoftDrink + " soft drinks available") ;
+        } else if (product instanceof Chocolate) {
+            System.out.println("we have " + stockChocolate + " chocolates available");
+        } else if (product instanceof SaltySnack) {
+            System.out.println("we have " + stockSaltySnacks + " salty snakes available");
         }
     }
 
@@ -52,9 +61,9 @@ public class VendingMachine {
             SaltySnack popcorn = new SaltySnack("popcorn");
             SoftSDrink coke = new SoftSDrink("coke");
 
-            vendingMachine.addStock(Cadbury,2);
-            vendingMachine.addStock(popcorn, 1);
-            vendingMachine.addStock(coke, 2);
+            vendingMachine.addStock(Cadbury,5);
+            vendingMachine.addStock(popcorn, 10);
+            vendingMachine.addStock(coke, 8);
 
             vendingMachine.buy(coke);
             vendingMachine.buy(coke);
@@ -62,11 +71,14 @@ public class VendingMachine {
 
             vendingMachine.buy(Cadbury);
             vendingMachine.buy(Cadbury);
-           // vendingMachine.buy();
-            ;
+
             vendingMachine.buy(popcorn);
             vendingMachine.buy(popcorn);
             vendingMachine.buy(popcorn);
+
+            vendingMachine.getStock(Cadbury);
+            vendingMachine.getStock(coke);
+            vendingMachine.getStock(popcorn);
 
         } catch (ProductNotFoundException ex) {
           ex.printStackTrace();

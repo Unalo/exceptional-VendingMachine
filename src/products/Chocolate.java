@@ -1,4 +1,4 @@
-package Products;
+package products;
 
 public class Chocolate extends Product {
     String choc;
